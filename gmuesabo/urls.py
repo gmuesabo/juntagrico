@@ -5,4 +5,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('impersonate/', include('impersonate.urls')),
     path('', include('juntagrico.urls')),
+    path('',include('juntagrico_billing.urls')),
 ]

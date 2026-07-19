@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'juntagrico.apps.JuntagricoAdminConfig',
     'gmuesabo',
+    'juntagrico_billing',
     'juntagrico',
     'import_export',
     'impersonate',
@@ -223,3 +224,7 @@ ENABLE_SHARES = True
 SHARE_PRICE = "100"
 
 STYLES = {'static': ['gmuesabo/css/customize.css']}
+
+# Juntagrico billing
+
+BILLS_USERMENU = True

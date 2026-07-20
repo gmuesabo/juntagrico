@@ -57,19 +57,19 @@ class Command(BaseCommand):
                 notes = ''
                 if row[10] is None and row[9] is not None:
                     # store second email address without name
-                    notes += "2. E-Mail-Adresse: " + row[9] + "\n"
+                    notes += "2. E-Mail-Adresse: " + row[9]
                 if row[12] is not None:
-                    notes += "# Bemerkungen Profil\n" + row[12]
+                    notes += "\n# Bemerkungen Profil\n" + row[12]
                 if row[20] is not None:
-                    notes += "# AbonnentIn seit\n" + str(row[20])
+                    notes += "\n# AbonnentIn seit\n" + str(row[20])
                 if row[21] is not None:
-                    notes += "# Eintritt (Grund, Weg)\n" + row[21]
+                    notes += "\n# Eintritt (Grund, Weg)\n" + row[21]
                 if row[22] is not None:
-                    notes += "# Grund Austritt\n" + row[22]
+                    notes += "\n# Grund Austritt\n" + row[22]
                 if row[38] is not None:
-                    notes += "# Genossenschaftsbeitritt via\n" + row[38]
+                    notes += "\n# Genossenschaftsbeitritt via\n" + row[38]
                 if row[41] is not None:
-                    notes += "# Bemerkungen Gnossi\n" + row[41]
+                    notes += "\n# Bemerkungen Gnossi\n" + row[41]
                 member = Member.objects.create(
                     last_name=row[0],
                     first_name=row[1],
@@ -136,11 +136,11 @@ class Command(BaseCommand):
 
                     notes = ''
                     if row[24] is not None:
-                        notes += "# Bem. Zusatzabo Eier\n" + row[24]
+                        notes += "\n# Bem. Zusatzabo Eier\n" + row[24]
                     if row[26] is not None:
-                        notes += "# Zahlung / Buchungstexte\n" + row[26]
+                        notes += "\n# Zahlung / Buchungstexte\n" + row[26]
                     if row[36] is not None:
-                        notes += "# Bemerkungen Finanzen\n" + row[36]
+                        notes += "\n# Bemerkungen Finanzen\n" + row[36]
                     subscription = Subscription.objects.create(
                         depot=depots[depot_name],
                         nickname=str(row[13]) + ' - ' + row[14],

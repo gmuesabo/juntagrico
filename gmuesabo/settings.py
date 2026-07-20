@@ -119,7 +119,8 @@ DATABASES = {
 
 # Email
 
-EMAIL_BACKEND='juntagrico.backends.email.EmailBackend'
+# disable emails for now
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_HOST = os.environ.get('JUNTAGRICO_EMAIL_HOST')
 EMAIL_HOST_USER = os.environ.get('JUNTAGRICO_EMAIL_USER')
@@ -194,8 +195,9 @@ DJRICHTEXTFIELD_CONFIG = defaults.richtextfield_config(LANGUAGE_CODE)
 
 # juntagrico Settings
 
-ORGANISATION_NAME = "Genossenschaft gmüesabo"
-ORGANISATION_LONG_NAME = "Genossenschaft gmüesabo"
+ORGANISATION_NAME = "gmüesabo"
+ORGANISATION_LONG_NAME = "gmüesabo"
+ORGANISATION_NAME_CONFIG = {"type": "Genossenschaft", "gender": "f"}
 ORGANISATION_ADDRESS = {
     "name":"Genossenschaft gmüesabo",
     "street" : "Lagerplatz",
@@ -205,25 +207,47 @@ ORGANISATION_ADDRESS = {
     "extra" : "c/o machwerk"
 }
 ORGANISATION_BANK_CONNECTION = {
-    "PC" : "-",
+    "PC" : "46-110-7",
     "IBAN" : "CH78 0839 0033 6959 1000 0",
     "BIC" : "ABSOCH22",
-    "NAME" : "Alternative Bank Schweiz AG",
-    "ESR" : ""
+    "NAME" : "Alternative Bank Schweiz AG"
 }
 ORGANISATION_WEBSITE = {
-    'name': "www.gmuesabo.org",
-    'url': "https://www.gmuesabo.org"
+    'name': "gmuesabo.ch",
+    'url': "https://gmuesabo.ch"
 }
 
 CONTACTS = {
     "general": "info@gmuesabo.ch"
 }
 
+BUSINESS_REGULATIONS = 'https://gmuesabo.ch/site/files/Betriebsreglement_gmuesabo_19052019.pdf'
+BYLAWS = 'https://gmuesabo.ch/site/files/Statuten_gmuesabo_26.5.2018.pdf'
+FAQ_DOC = 'https://gmuesabo.ch/site/index.php/faq'
+ACTIVITY_AREA_INFO = 'https://gmuesabo.ch/site/files/gmuesabo_mitarbeitsmoeglichkeiten.pdf'
+
+BUSINESS_YEAR_CANCELATION_MONTH = 10
+MEMBERSHIP_END_MONTH = 12
+MEMBERSHIP_END_NOTICE_PERIOD = 6
+
 ENABLE_SHARES = True
 SHARE_PRICE = "100"
 
+ASSIGNMENT_UNIT = 'HOURS'
+
+FIRST_JOB_INFO = []
+
+VOCABULARY = {
+    'package': 'Korb',
+    'from': '{} vom {}'
+}
+
 STYLES = {'static': ['gmuesabo/css/customize.css']}
+
+FROM_FILTER = {
+    'filter_expression': r'.*@gmuesabo\.ch',
+    'replacement_from': 'system@gmuesabo.ch'
+}
 
 # Juntagrico billing
 

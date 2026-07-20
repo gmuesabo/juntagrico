@@ -143,7 +143,7 @@ class Command(BaseCommand):
                         notes += "\n# Bemerkungen Finanzen\n" + row[36]
                     subscription = Subscription.objects.create(
                         depot=depots[depot_name],
-                        nickname=str(row[13]) + ' - ' + row[14],
+                        nickname=(str(row[13]) + ' - ' + row[14])[:30],
                         start_date=start_date,
                         activation_date=start_date,
                         notes=notes,

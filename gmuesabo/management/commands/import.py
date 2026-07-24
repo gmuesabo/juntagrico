@@ -11,7 +11,7 @@ from juntagrico.entity.subtypes import SubscriptionType, SubscriptionBundle
 
 
 class Command(BaseCommand):
-    help = "Import gmuesabo data"
+    help = "Import gmuesabo members and subscriptions"
 
     def add_arguments(self, parser):
         parser.add_argument('file', help='xlsx file to import')
@@ -21,7 +21,7 @@ class Command(BaseCommand):
             action='store_true',
             dest='clear',
             default=False,
-            help='Delete existing data before import',
+            help='Delete existing objects before import',
         )
 
     def handle(self, file, *args, clear=False, **options):

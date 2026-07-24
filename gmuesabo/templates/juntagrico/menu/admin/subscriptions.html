@@ -1,0 +1,13 @@
+{% extends "juntagrico/menu/admin/subscriptions.html" %}
+{% load juntagrico.config %}
+
+{% block sub %}
+    {{ block.super }}
+    {% if perms.juntagrico.view_subscription and perms.juntagrico.view_share %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'manage-subscription-shares' %}">
+                {% vocabulary 'share_pl' %}
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}

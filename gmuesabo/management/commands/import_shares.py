@@ -46,7 +46,7 @@ class Command(BaseCommand):
                 first_name = (row[2] or '-').strip()
                 last_name = row[1].strip()
                 try:
-                    member, created = Member.objects.get_or_create(first_name=first_name or '-', last_name=last_name, defaults={
+                    member = Member.objects.get_or_create(first_name=first_name or '-', last_name=last_name, defaults={
                         'email': f'share{number}@juntagrico.id',
                         'addr_street': row[5] or '?',
                         'addr_zipcode': zipcode,
@@ -54,8 +54,7 @@ class Command(BaseCommand):
                         'phone': '-',
                         'mobile_phone': '-',
                         'deactivation_date': today,  # deactivate account to prevent sending emails
-                    })
-                    print(member, created)
+                    })[0]
                 except MultipleObjectsReturned:
                     member = Member.objects.filter(first_name=first_name, last_name=last_name).first()
 
@@ -73,7 +72,7 @@ class Command(BaseCommand):
                     paid_date=paid_date,
                     issue_date=paid_date,
                     booking_date=paid_date,
-                    notes=f'{row[3] or ''}\n{row[4] or ''}\n{row[10] or ''}'
+                    notes=f'{row[3] or ""}\n{row[4] or ""}\n{row[10] or ""}'
                 )
                 count_shares += 1
                 payback = str(row[10]).lower()

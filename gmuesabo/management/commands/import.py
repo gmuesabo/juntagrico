@@ -1,6 +1,7 @@
 import datetime
 
 import tablib
+from django.core.management import call_command
 
 from django.core.management.base import BaseCommand
 from juntagrico.entity.depot import Depot
@@ -180,5 +181,12 @@ class Command(BaseCommand):
                             activation_date=date,
                         )
                     count_subscription += 1
+
+            call_command(
+                'reorder',
+                'juntagrico.SubscriptionType',
+                'juntagrico.SubscriptionBundle',
+                'juntagrico.Depot'
+            )
 
             print('imported {} members and {} subscriptions'.format(count_members, count_subscription))

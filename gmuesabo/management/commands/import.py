@@ -39,7 +39,6 @@ class Command(BaseCommand):
                 sub_type.name: sub_type
                 for sub_type in SubscriptionType.objects.all()
             }
-            print(sub_types)
 
             depots = {
                 depot.name: depot
@@ -169,17 +168,31 @@ class Command(BaseCommand):
                     )
 
                     # extra sub
-                    if row[23] is not None and 'eier' in sub_types:
+                    if row[42] is not None:
+                        amount, _, kind = row[42].partition(' / ')
+                        if amount[1] == 'x':
+                            amount = int(amount[0])
+                        else:
+                            amount = 1
+                        if kind not in sub_types:
+                            sub_types[kind] = SubscriptionType.objects.create(
+                                name=kind,
+                                bundle=SubscriptionBundle.objects.get_or_create(long_name='Eier')[0],
+                                required_assignments=0,
+                                price=0,
+                                is_extra=True,
+                            )
                         week = row[23]
                         if week == 1:
                             date = datetime.date(2026, 1, 1)
                         else:
                             date = datetime.datetime.strptime(f'2026-W{week}-1', "%Y-W%W-%w").date()
-                        SubscriptionPart.objects.create(
-                            subscription=subscription,
-                            type=sub_types['eier'],
-                            activation_date=date,
-                        )
+                        for _ in range(amount):
+                            SubscriptionPart.objects.create(
+                                subscription=subscription,
+                                type=sub_types[kind],
+                                activation_date=date,
+                            )
                     count_subscription += 1
 
             call_command(
